@@ -320,7 +320,7 @@ This project is private and proprietary.
 - Built with [Vite](https://vitejs.dev/)
 - UI components from [shadcn/ui](https://ui.shadcn.com/)
 - Backend powered by [Supabase](https://supabase.com/)
-- Deployed on [Cloudflare Workers](https://workers.cloudflare.com/)
+- Deployed on [Cloudflare Pages](https://pages.cloudflare.com/)
 
 ---
 
