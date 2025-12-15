@@ -9,24 +9,28 @@ Lotus Routine is a modern accountability platform that helps you track your dail
 ## ✨ Features
 
 ### 📊 Core Tracking
+
 - **Daily Hour Logging** - Log and track hours worked each day
 - **Calendar View** - Visual calendar interface to see your progress at a glance
 - **Daily Goals** - Set and track daily hour targets
 - **Streak Tracking** - Maintain consecutive days of logging with streak tracking
 
 ### 🏆 Competition & Social
+
 - **Leaderboards** - Weekly and monthly rankings to see where you stand
 - **Friends System** - Add friends, send requests, and compare progress
 - **Challenges** - Create and join challenges with friends
 - **Activity Feed** - See what your friends are up to in real-time
 
 ### 🎖️ Achievements & Motivation
+
 - **Badge System** - Earn badges based on milestones (Bronze, Silver, Gold, Samurai, Warrior)
 - **Custom Achievements** - Add and manage your own achievements
 - **Motivational Quotes** - Get inspired with daily motivational quotes
 - **Analytics** - Detailed insights into your progress and patterns
 
 ### ⚙️ User Features
+
 - **Profile Management** - Customize your profile and view your stats
 - **Settings** - Personalize your experience
 - **Responsive Design** - Works seamlessly on desktop and mobile
@@ -55,7 +59,7 @@ Lotus Routine is a modern accountability platform that helps you track your dail
 
 ```bash
 git clone <your-repo-url>
-cd neon-ledger
+cd routine
 ```
 
 ### 2. Install Dependencies
@@ -116,21 +120,25 @@ Lotus Routine can be built as native desktop and mobile apps using Tauri.
 ### Quick Start
 
 1. **Install Rust** (if not installed):
+
    ```bash
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 3. **Run in development mode**:
+
    ```bash
    npm run tauri:dev
    ```
 
 4. **Build for your platform**:
+
    ```bash
    # Build for current platform
    npm run tauri:build
@@ -146,11 +154,13 @@ Lotus Routine can be built as native desktop and mobile apps using Tauri.
 ### App Icons
 
 Before building, set up your app icons:
+
 ```bash
 ./scripts/setup-tauri-icons.sh
 ```
 
 Then add proper icon files to `src-tauri/icons/`:
+
 - `32x32.png`, `128x128.png`, `128x128@2x.png`
 - `icon.ico` (Windows)
 - `icon.icns` (macOS)
@@ -158,6 +168,7 @@ Then add proper icon files to `src-tauri/icons/`:
 ### Environment Variables for Tauri
 
 Set environment variables before building:
+
 ```bash
 export VITE_SUPABASE_URL="https://your-project-id.supabase.co"
 export VITE_SUPABASE_PUBLISHABLE_KEY="eyJ..."
@@ -175,12 +186,14 @@ See [TAURI_SETUP.md](./TAURI_SETUP.md) for detailed setup instructions, prerequi
 ### Deploy to Cloudflare Workers
 
 #### Prerequisites
+
 1. Install Wrangler CLI: `npm install -g wrangler` or use the local version
 2. Authenticate: `npx wrangler login`
 
 #### Quick Deploy
 
 **Option 1: Using npm scripts**
+
 ```bash
 # Set environment variables
 export VITE_SUPABASE_URL="https://your-project-id.supabase.co"
@@ -191,6 +204,7 @@ npm run deploy
 ```
 
 **Option 2: Using deployment script**
+
 ```bash
 # Set environment variables
 export VITE_SUPABASE_URL="https://your-project-id.supabase.co"
@@ -201,6 +215,7 @@ export VITE_SUPABASE_PUBLISHABLE_KEY="eyJ..."
 ```
 
 **Option 3: Using encrypted secrets (recommended)**
+
 ```bash
 # Set secrets (one-time setup)
 wrangler secret put VITE_SUPABASE_URL
@@ -240,29 +255,29 @@ neon-ledger/
 
 ## 🔧 Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
-| `npm run deploy` | Build and deploy to Cloudflare |
-| `npm run deploy:dev` | Deploy to development environment |
-| `npm run deploy:prod` | Deploy to production environment |
-| `npm run tauri:dev` | Run Tauri app in development mode |
-| `npm run tauri:build` | Build Tauri app for current platform |
-| `npm run tauri:build:windows` | Build Windows app |
-| `npm run tauri:build:macos` | Build macOS app |
-| `npm run tauri:build:linux` | Build Linux app |
-| `npm run tauri:build:android` | Build Android app (beta) |
-| `npm run tauri:build:ios` | Build iOS app (beta) |
+| Script                        | Description                          |
+| ----------------------------- | ------------------------------------ |
+| `npm run dev`                 | Start development server             |
+| `npm run build`               | Build for production                 |
+| `npm run preview`             | Preview production build             |
+| `npm run lint`                | Run ESLint                           |
+| `npm run deploy`              | Build and deploy to Cloudflare       |
+| `npm run deploy:dev`          | Deploy to development environment    |
+| `npm run deploy:prod`         | Deploy to production environment     |
+| `npm run tauri:dev`           | Run Tauri app in development mode    |
+| `npm run tauri:build`         | Build Tauri app for current platform |
+| `npm run tauri:build:windows` | Build Windows app                    |
+| `npm run tauri:build:macos`   | Build macOS app                      |
+| `npm run tauri:build:linux`   | Build Linux app                      |
+| `npm run tauri:build:android` | Build Android app (beta)             |
+| `npm run tauri:build:ios`     | Build iOS app (beta)                 |
 
 ## 🔐 Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `VITE_SUPABASE_URL` | Your Supabase project URL | Yes |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | Your Supabase anon/public key | Yes |
+| Variable                        | Description                   | Required |
+| ------------------------------- | ----------------------------- | -------- |
+| `VITE_SUPABASE_URL`             | Your Supabase project URL     | Yes      |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Your Supabase anon/public key | Yes      |
 
 **Note**: These are build-time variables. They get baked into your JavaScript bundle during the build process.
 
@@ -293,7 +308,8 @@ To remove `.env` and `.md` files from git history:
 ## 👤 Author
 
 **th3void**
-- Email: th3void.24@protonmail.com
+
+- Email: <th3void.24@protonmail.com>
 
 ## 📝 License
 
