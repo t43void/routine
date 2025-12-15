@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Connection Lost - Lotus Routine</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+				background:
+					radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+					radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+					radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%),
+					linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3a7bd5 100%);
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #ffffff;
+				position: relative;
+				overflow: hidden;
+			}
+
+			body::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background:
+					radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+				animation: float 20s ease-in-out infinite;
+			}
+
+			@keyframes float {
+				0%, 100% { transform: translateY(0px) rotate(0deg); }
+				33% { transform: translateY(-10px) rotate(1deg); }
+				66% { transform: translateY(5px) rotate(-1deg); }
+			}
+
+			.container {
+				position: relative;
+				z-index: 10;
+				text-align: center;
+				padding: 3.5rem;
+				background:
+					rgba(255, 255, 255, 0.12),
+					linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+				backdrop-filter: blur(20px);
+				-webkit-backdrop-filter: blur(20px);
+				border-radius: 24px;
+				border: 1px solid rgba(255, 255, 255, 0.18);
+				box-shadow:
+					0 20px 40px rgba(0, 0, 0, 0.15),
+					inset 0 1px 0 rgba(255, 255, 255, 0.2);
+				max-width: 520px;
+				animation: slideIn 0.6s ease-out;
+			}
+
+			@keyframes slideIn {
+				from {
+					opacity: 0;
+					transform: translateY(30px) scale(0.95);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0) scale(1);
+				}
+			}
+
+			.icon-container {
+				position: relative;
+				display: inline-block;
+				margin-bottom: 2rem;
+			}
+
+			.icon {
+				font-size: 5rem;
+				line-height: 1;
+				filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+				animation: bounce 3s ease-in-out infinite;
+			}
+
+			@keyframes bounce {
+				0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+				40% { transform: translateY(-10px); }
+				60% { transform: translateY(-5px); }
+			}
+
+			.icon-bg {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 120px;
+				height: 120px;
+				background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 70%, transparent 100%);
+				border-radius: 50%;
+				animation: pulse-bg 4s ease-in-out infinite;
+			}
+
+			@keyframes pulse-bg {
+				0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+				50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+			}
+
+			h1 {
+				font-size: 2.2rem;
+				font-weight: 700;
+				margin-bottom: 1.2rem;
+				background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+				letter-spacing: -0.02em;
+			}
+
+			p {
+				font-size: 1.15rem;
+				line-height: 1.6;
+				margin-bottom: 2.5rem;
+				opacity: 0.85;
+				font-weight: 400;
+			}
+
+			.status {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.75rem;
+				margin-bottom: 2rem;
+				padding: 1rem 1.5rem;
+				background: rgba(255, 255, 255, 0.08);
+				border-radius: 16px;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+			}
+
+			.spinner-container {
+				position: relative;
+			}
+
+			.spinner {
+				width: 24px;
+				height: 24px;
+				border: 3px solid rgba(255, 255, 255, 0.2);
+				border-top: 3px solid #ffffff;
+				border-radius: 50%;
+				animation: spin 1.2s linear infinite;
+				box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+			}
+
+			@keyframes spin {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			}
+
+			.spinner::after {
+				content: '';
+				position: absolute;
+				top: -3px;
+				left: -3px;
+				right: -3px;
+				bottom: -3px;
+				border: 2px solid rgba(255, 255, 255, 0.1);
+				border-radius: 50%;
+				animation: spin-reverse 2s linear infinite;
+			}
+
+			@keyframes spin-reverse {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(-360deg); }
+			}
+
+			.status-text {
+				font-size: 0.95rem;
+				font-weight: 500;
+				opacity: 0.9;
+				letter-spacing: 0.02em;
+			}
+
+			button {
+				background:
+					linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.95) 100%),
+					rgba(255, 255, 255, 0.1);
+				color: #2a5298;
+				border: none;
+				padding: 1.2rem 3rem;
+				font-size: 1.1rem;
+				font-weight: 600;
+				border-radius: 50px;
+				cursor: pointer;
+				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+				box-shadow:
+					0 8px 25px rgba(0, 0, 0, 0.15),
+					inset 0 1px 0 rgba(255, 255, 255, 0.2);
+				position: relative;
+				overflow: hidden;
+				letter-spacing: 0.02em;
+			}
+
+			button::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+				transition: left 0.5s;
+			}
+
+			button:hover {
+				transform: translateY(-3px);
+				box-shadow:
+					0 12px 35px rgba(0, 0, 0, 0.2),
+					inset 0 1px 0 rgba(255, 255, 255, 0.3);
+			}
+
+			button:hover::before {
+				left: 100%;
+			}
+
+			button:active {
+				transform: translateY(-1px);
+				box-shadow:
+					0 6px 20px rgba(0, 0, 0, 0.25),
+					inset 0 1px 0 rgba(255, 255, 255, 0.3);
+			}
+
+			@media (max-width: 600px) {
+				.container {
+					padding: 2.5rem 2rem;
+					margin: 1rem;
+				}
+
+				h1 {
+					font-size: 1.8rem;
+				}
+
+				p {
+					font-size: 1rem;
+				}
+
+				.icon {
+					font-size: 4rem;
+				}
+
+				.icon-bg {
+					width: 100px;
+					height: 100px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="icon-container">
+				<div class="icon-bg"></div>
+				<div class="icon">📡</div>
+			</div>
+			<h1>Connection Lost</h1>
+			<p>Unable to connect to Lotus Routine. Please check your internet connection and try again.</p>
+			<div class="status">
+				<div class="spinner-container">
+					<div class="spinner"></div>
+				</div>
+				<span class="status-text">Attempting to reconnect...</span>
+			</div>
+			<button onclick="retryConnection()">Retry Connection</button>
+		</div>
+
+		<script>
+			let retryInterval;
+
+			async function retryConnection() {
+			    if (window.__TAURI__) {
+			        await window.__TAURI__.invoke('retry_connection');
+			    } else {
+			        window.location.reload();
+			    }
+			}
+
+			// Auto-retry every 5 seconds
+			retryInterval = setInterval(() => {
+			    fetch('https://accounted.th3void.com', { method: 'HEAD', mode: 'no-cors' })
+			        .then(() => retryConnection())
+			        .catch(() => {});
+			}, 5000);
+
+			// Check connection status
+			window.addEventListener('online', () => {
+			    retryConnection();
+			});
+		</script>
+	</body>
+</html>
+

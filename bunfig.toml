@@ -1,0 +1,32 @@
+# Bun configuration file
+# https://bun.sh/docs/cli/bunfig
+
+[install]
+# Auto-install peer dependencies
+auto = true
+
+# Production dependencies only
+production = false
+
+# Optional dependencies
+optional = true
+
+# Global package installation directory
+globalBinDir = "~/.bun/bin"
+globalCacheDir = "~/.bun/install/cache"
+
+[install.scopes]
+# Scope-specific registry configuration
+# Example:
+# "@myorg" = "https://npm.pkg.github.com"
+
+[install.lockfile]
+# Lockfile configuration
+save = true
+saveDev = true
+saveOptional = true
+
+[install.cache]
+# Cache configuration
+dir = "~/.bun/install/cache"
+
